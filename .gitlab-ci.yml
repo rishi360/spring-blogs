@@ -9,7 +9,6 @@ build:
   artifacts:
     paths:
       - spring-blogs/target/myApp-*.jar
-test
 unitTests:
   stage: test
   script:
