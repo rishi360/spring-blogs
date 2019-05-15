@@ -107,6 +107,13 @@
             <version>2.1.4</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>aolshared10c-releases</name>
+        <url>${env.MAVEN_REPO_URL}/libs-release-local</url>
+    </repository>
+</distributionManagement>
 
     <build>
         <plugins>
