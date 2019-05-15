@@ -1,14 +1,5 @@
 image: maven:3.3.9
 
-variables:
-  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-
-cache:
-  paths:
-    - .m2/repository/
-    - target/
-
 
 stages:
   - build
@@ -16,6 +7,9 @@ stages:
 build:
   stage: build
   script: mvn clean package
+  artifacts:
+    paths: 
+    - https://rishijfrog.jfrog.io/rishijfrog/libs-release-local
 unitTests:
   stage: test
   script:
