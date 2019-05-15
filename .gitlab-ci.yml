@@ -8,7 +8,7 @@ build:
   script: mvn clean package
   artifacts:
     paths:
-      - dist
+      - public
 unitTests:
   stage: test
   script:
