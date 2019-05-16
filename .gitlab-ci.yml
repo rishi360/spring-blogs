@@ -14,7 +14,7 @@ build:
     
     -   mvn clean package
   
-    - ./jfrog rt u "target/*.jar" testrepo 
+    - ./jfrog rt u "target/*.jar" testrepo --build-name=my-build-name --build-number=18
 unitTests:
   stage: test
   script:
