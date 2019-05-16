@@ -5,6 +5,7 @@ before_script:
   - curl -fL https://getcli.jfrog.io | sh
 
   - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
+  - export M2_HOME=/usr/share/maven
 stages:
   - build
   - test
