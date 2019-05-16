@@ -107,7 +107,13 @@
             <version>2.1.4</version>
         </dependency>
     </dependencies>
-    
+    <distributionManagement>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>aolshared10c-snapshots</name>
+        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-snapshot-local</url>
+    </snapshotRepository>
+</distributionManagement>
 
     <build>
         <plugins>
