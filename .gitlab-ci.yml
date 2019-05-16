@@ -1,26 +1,27 @@
-image: maven:3.3.9
+image: maven:latest
 
-before_script:
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
-  - curl -fL https://getcli.jfrog.io | sh
+cache:
+  paths:
+    - .m2/repository/
+    - target/
 
-  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
-  - export M2_HOME=/usr/share/maven
-stages:
-  - build
-  - test
 build:
-    stage: build
-    script: 
-    
-    -   mvn clean package
-  
-    - ./jfrog rt mvn "clean package"  testrepo --build-name=my-build-name --build-number=$CI_JOB_ID
-    - ./jfrog rt bce my-build-name $CI_JOB_ID
-    - ./jfrog rt bp my-build-name $CI_JOB_ID
-unitTests:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS compile
+
+test:
   stage: test
   script:
-    - mvn test
+    - mvn $MAVEN_CLI_OPTS test
 
-   
+deploy:
+  stage: deploy
+  script:
+    - mvn $MAVEN_CLI_OPTS deploy
+  only:
+    - develop
