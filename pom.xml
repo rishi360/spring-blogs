@@ -108,12 +108,38 @@
             <version>2.1.4</version>
         </dependency>
     </dependencies>
+    <properties>
+ <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ <maven.compiler.source>1.8</maven.compiler.source>
+ <maven.compiler.target>1.8</maven.compiler.target>
+ </properties>
     <distributionManagement>
+        <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>aolshared10c-releases</name>
+        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-release</url>
+    </repository>
+</distributionManagement>
+<distributionManagement>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>aolshared10c-snapshots</name>
+        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-snapshot</url>
+    </snapshotRepository>
+</distributionManagement>
     <snapshotRepository>
         <id>snapshots</id>
         <name>aolshared10c-snapshots</name>
         <url>https://rishijfrog.jfrog.io/rishijfrog/libs-snapshot-local</url>
     </snapshotRepository>
+</distributionManagement>
+<distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>aolshared10c-releases</name>
+        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-release-local</url>
+    </repository>
 </distributionManagement>
 
     <build>
