@@ -1,11 +1,10 @@
 image: maven:3.3.9
 
 before_script:
-- run:
-    name: Install jFrog CLI
-    command: curl -fL https://getcli.jfrog.io | sh
-- run: 
-    ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
+
+  - curl -fL https://getcli.jfrog.io | sh
+
+  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
 stages:
   - build
   - test
@@ -18,5 +17,5 @@ unitTests:
     - mvn test
 
 Push to Artifactory:
- - run: 
-      ./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
+ 
+   - ./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
