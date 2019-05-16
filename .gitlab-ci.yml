@@ -10,7 +10,9 @@ stages:
   - test
 build:
     stage: build
-    script: mvn clean package
+    script: 
+    
+    -   mvn clean package
   
     - ./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
 unitTests:
