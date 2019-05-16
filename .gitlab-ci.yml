@@ -1,16 +1,22 @@
 image: maven:3.3.9
 
-
+before_script:
+- run:
+    name: Install jFrog CLI
+    command: curl -fL https://getcli.jfrog.io | sh
+- run: 
+./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
 stages:
   - build
   - test
 build:
   stage: build
   script: mvn clean package
-  artifacts:
-    paths: 
-    - https://rishijfrog.jfrog.io/rishijfrog/libs-release-local
 unitTests:
   stage: test
   script:
     - mvn test
+
+Push to Artifactory:
+ - run: 
+./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
