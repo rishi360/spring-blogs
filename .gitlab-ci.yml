@@ -5,7 +5,7 @@ before_script:
     name: Install jFrog CLI
     command: curl -fL https://getcli.jfrog.io | sh
 - run: 
-./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
+    ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
 stages:
   - build
   - test
@@ -19,4 +19,4 @@ unitTests:
 
 Push to Artifactory:
  - run: 
-./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
+      ./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
