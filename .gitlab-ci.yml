@@ -17,7 +17,7 @@ build:
 test:
   stage: test
   script:
-    - mvn $MAVEN_CLI_OPTS test
+    - mvn test
 
 deploy:
   stage: deploy
