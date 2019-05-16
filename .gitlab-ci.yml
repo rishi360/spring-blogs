@@ -14,7 +14,7 @@ build:
     
     -   mvn clean package
   
-    - ./jfrog rt u "multi*/*.jar"  testrepo --build-name=testrepo --build-number=$CIRCLE_BUILD_NUM --flat=false
+    - ./jfrog rt u "multi*/*.jar"  testrepo 
 unitTests:
   stage: test
   script:
