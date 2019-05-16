@@ -11,11 +11,10 @@ stages:
 build:
   stage: build
   script: mvn clean package
+  - ./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
 unitTests:
   stage: test
   script:
     - mvn test
 
-Artifactory:
- 
-   - ./jfrog rt u "multi*/*.jar"  testrepo --build-name=fino --build-number=$CIRCLE_BUILD_NUM --flat=false
+   
