@@ -1,4 +1,5 @@
-image: maven
+image: maven:3.3.9
+
 before_script:
   # Install JFrog CLI
   -  curl -fL https://getcli.jfrog.io | sh
@@ -13,7 +14,7 @@ before_script:
   - sed -i 's,MAVEN_REPO_SNAPSHOT_RESOLVER,'"$MAVEN_REPO_SNAPSHOT_RESOLVER"',g' configuration.yml
   - sed -i 's,MAVEN_REPO_RELEASES_RESOLVER,'"$MAVEN_REPO_RELEASES_RESOLVER"',g' configuration.yml
 build:
-    script:
+  script:
   # Run the MVN command
   - ./jfrog rt mvn "clean install" configuration.yml --build-name=scdfrestrunner --build-number=$CI_JOB_ID
   # Collect the environment variables
