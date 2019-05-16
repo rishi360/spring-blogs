@@ -1,4 +1,4 @@
-image: maven:latest
+image: maven
 before_script:
   # Install JFrog CLI
   -  curl -fL https://getcli.jfrog.io | sh
