@@ -10,7 +10,6 @@
 
     <name>blog-demo</name>
     <description>Blog Demo project using Spring Boot</description>
- 
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -108,33 +107,6 @@
             <version>2.1.4</version>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        
-    <repository>
-        <id>central</id>
-        <name>aolshared10c-releases</name>
-        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-release</url>
-    </repository>
-    
-    <snapshotRepository>
-        <id>snapshots</id>
-        <name>aolshared10c-snapshots</name>
-        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-snapshot</url>
-    </snapshotRepository>
-
-    <snapshotRepository>
-        <id>snapshots</id>
-        <name>aolshared10c-snapshots</name>
-        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-snapshot-local</url>
-    </snapshotRepository>
-
-    <repository>
-        <id>central</id>
-        <name>aolshared10c-releases</name>
-        <url>https://rishijfrog.jfrog.io/rishijfrog/libs-release-local</url>
-    </repository>
-</distributionManagement>
 
     <build>
         <plugins>
