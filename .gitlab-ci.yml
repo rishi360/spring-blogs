@@ -1,3 +1,9 @@
+stages:
+  - build
+  - test
+  - Build image
+  - Push to Docker Hub
+
 image: maven:3-jdk-8
 
 before_script:
@@ -11,11 +17,7 @@ before_script:
   # Replace the repository name in the configuration.yml to the correct one.
   - sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY"',g' configuration.yml
   
-stages:
-  - build
-  - test
-  - Build image
-  - Push to Docker Hub
+
   
 build:
   stage: build
@@ -31,24 +33,19 @@ unitTests:
   stage: test
   script:
     - mvn test
-docker:
-   image: docker:stable
-   variables:
-     LATEST_VER: angristan/app:latest
-     MAJOR_VER: angristan/app:2
-     MINOR_VER: angristan/app:2.3
-     PATCH_VER: angristan/app:2.3.1
-   stage: Build image
-   script:
+
+Build image: 
+  image: docker
+  stage: Build image
+  script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
-docker push:
+
+Push to Docker Hub: 
   stage: Push to Docker Hub
-  only:
-  - master
   script:
   - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
-   
+
   only:
     - docker
