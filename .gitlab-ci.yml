@@ -49,11 +49,11 @@ Build image:
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
-  - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+  - echo -n "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin "$REGISTRY_PASSWORD"
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
 
 Push to Docker Hub:
-  image: docker:lates
+  image: docker:latest
   
   variables:
     DOCKER_HOST: tcp://docker:2375/
