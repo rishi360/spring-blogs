@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - Build & Push Docker image
+  - Build image
   
 build:
   image: maven:3-jdk-8
