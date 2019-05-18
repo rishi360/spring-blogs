@@ -53,21 +53,12 @@ Build image:
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
 
 Push to Docker Hub:
-  image: docker:latest
-  
-  variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
-    LATEST_VER: angristan/app:latest
-    MAJOR_VER: angristan/app:2
-    MINOR_VER: angristan/app:2.3
-    PATCH_VER: angristan/app:2.3.1
-  services:
-  - docker:dind
+
+
   stage: Push to Docker Hub
   script:
-  - /builds/rishi360/citest/docker
-  - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+  
+  - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
 
   only:
