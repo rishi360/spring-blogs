@@ -31,7 +31,7 @@ unitTests:
   script:
     - mvn test
 
-Build-Push Docker image: 
+Docker image: 
   image: docker:latest
   
 
@@ -44,7 +44,7 @@ Build-Push Docker image:
     PATCH_VER: angristan/app:2.3.1
   services:
   - docker:dind
-  stage: Build & Push Docker image
+  stage: Build-Push Docker image
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
