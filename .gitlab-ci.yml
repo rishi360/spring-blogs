@@ -55,7 +55,7 @@ Build image:
 Push to Docker Hub:
 
 
-  stage: Push to Docker Hub
+  stage: Build image
   script:
   
   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
