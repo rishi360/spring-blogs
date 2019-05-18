@@ -34,14 +34,17 @@ unitTests:
 
 Build image: 
   image: docker:latest
-  services:
-  - docker:dind
+  
 
   variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
     LATEST_VER: angristan/app:latest
     MAJOR_VER: angristan/app:2
     MINOR_VER: angristan/app:2.3
     PATCH_VER: angristan/app:2.3.1
+  services:
+  - docker:dind
   stage: Build image
   script:
   - docker info
