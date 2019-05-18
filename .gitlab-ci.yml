@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - Build image
+  - Build & Push Docker image
   
 build:
   image: maven:3-jdk-8
@@ -44,7 +44,7 @@ Build & Push Docker image:
     PATCH_VER: angristan/app:2.3.1
   services:
   - docker:dind
-  stage: Build image
+  stage: Build & Push Docker image
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
