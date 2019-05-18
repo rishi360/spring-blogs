@@ -48,7 +48,6 @@ Build image:
   stage: Build image
   script:
   - docker info
-  - /builds/rishi360/citest/docker
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
   - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
