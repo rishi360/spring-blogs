@@ -33,7 +33,12 @@ unitTests:
     - mvn test
 
 Build image: 
-  image: docker
+  image: docker:latest
+  variables:
+    LATEST_VER: angristan/app:latest
+    MAJOR_VER: angristan/app:2
+    MINOR_VER: angristan/app:2.3
+    PATCH_VER: angristan/app:2.3.1
   stage: Build image
   script:
   - docker info
