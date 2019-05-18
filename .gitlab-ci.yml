@@ -27,6 +27,7 @@ build:
     - ./jfrog rt bp gitlabci-maven-artifactory $CI_JOB_ID
     
 unitTests:
+  image: maven:3-jdk-8
   stage: test
   script:
     - mvn test
