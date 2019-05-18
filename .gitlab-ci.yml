@@ -49,7 +49,7 @@ Build image:
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
-  - docker login -u "rishabh050189" --password-stdin "360logica"
+  - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
 
 Push to Docker Hub:
