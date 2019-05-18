@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - Build & Push Docker image
+  - Build-Push Docker image
   
 build:
   image: maven:3-jdk-8
@@ -31,7 +31,7 @@ unitTests:
   script:
     - mvn test
 
-Build & Push Docker image: 
+Build-Push Docker image: 
   image: docker:latest
   
 
