@@ -1,8 +1,7 @@
 stages:
   - build
   - test
-  - Build image
-  - Push to Docker Hub
+  - Build & Push Docker image
   
 build:
   image: maven:3-jdk-8
@@ -32,7 +31,7 @@ unitTests:
   script:
     - mvn test
 
-Build image: 
+Build & Push Docker image: 
   image: docker:latest
   
 
@@ -49,15 +48,6 @@ Build image:
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
-  - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
-  - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
-
-Push to Docker Hub:
-
-
-  stage: Build image
-  script:
-  
   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
 
