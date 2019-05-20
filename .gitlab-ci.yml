@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - Build-Push Docker image
+  - staging
   
 build:
   image: maven:3-jdk-8
@@ -50,6 +51,14 @@ Docker image:
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_JOB_ID" 
+
+Deploy to Staging:
+  stage: staging
+  environment: staging
+  script: 
+  - kubectl apply -f spring-blogs.yaml 
+  
+ 
 
   only:
     - docker
