@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blogs
+spec:
+  tls:
+  - hosts:
+    - rishabhtest.ml
+    secretName: self-signed
+  rules:
+  - host: rishabhtest.ml
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: blog
+          servicePort: 80
