@@ -56,7 +56,9 @@ deploy_production:
   image: lwolf/kubectl_deployer:latest
   script:
   - kubectl apply -f spring-blogs.yaml
-  environment: staging
+  environment:
+    name: staging
+    url: http://a8406dfd37bcf11e990dc0ec9e59b3d1-1193911175.us-east-1.elb.amazonaws.com/
  
 
   only:
