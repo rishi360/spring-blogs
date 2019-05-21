@@ -42,16 +42,12 @@ Docker image:
   services:
   - docker:dind
   
-  variables:
-  DOCKER_HOST: tcp://localhost:2375
-  DOCKER_DRIVER: overlay
+  stage: Build-Push Docker image
   
   before_script:
   - printenv
   - docker info
 
-
-  stage: Build-Push Docker image
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
