@@ -6,14 +6,15 @@ metadata:
   labels:
     app: blogs
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: blogs
   ports:
   - protocol: TCP
-    port: 8090
+    port: 80
+    targetPort: 8090
     name: http
-    nodePort: 30000
+ 
 
 ---
 apiVersion: extensions/v1beta1
