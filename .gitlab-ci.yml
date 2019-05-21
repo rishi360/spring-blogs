@@ -43,8 +43,8 @@ Docker image:
   DOCKER_DRIVER: overlay
   
   before_script:
-    - printenv
-    - docker info
+  - printenv
+  - docker info
 
 
   stage: Build-Push Docker image
