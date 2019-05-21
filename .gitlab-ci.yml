@@ -56,7 +56,6 @@ deploy_production:
   image: lwolf/kubectl_deployer:latest
   script:
   - kubectl apply -f spring-blogs.yaml
-  - kubectl apply -f ingress.yaml 
   environment: staging
  
 
