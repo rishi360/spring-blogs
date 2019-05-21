@@ -33,21 +33,18 @@ unitTests:
     - mvn test
 
 Docker image: 
-  image: docker:git
+  image: docker:latest
   
   variables:
-  DOCKER_HOST: tcp://localhost:2375
-  DOCKER_DRIVER: overlay2
-  
+    DOCKER_HOST: tcp://localhost:2375/
+    DOCKER_DRIVER: overlay2
+    LATEST_VER: angristan/app:latest
+    MAJOR_VER: angristan/app:2
+    MINOR_VER: angristan/app:2.3
+    PATCH_VER: angristan/app:2.3.1
   services:
   - docker:dind
-  
   stage: Build-Push Docker image
-  
-  before_script:
-  - printenv
-  - docker info
-
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_JOB_ID" .
