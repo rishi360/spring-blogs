@@ -37,6 +37,7 @@ Docker image:
   
 
   variables:
+    DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
     LATEST_VER: angristan/app:latest
     MAJOR_VER: angristan/app:2
