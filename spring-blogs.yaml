@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: spring-blogs
-        image: rishabh050189/spring-blogs:"$CI_JOB_ID"
+        image: rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
         imagePullPolicy: Always
         ports:
         - containerPort: 8090
