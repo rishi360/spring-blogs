@@ -62,4 +62,4 @@ deploy_production:
  
 
   only:
-    - docker
+    - development
