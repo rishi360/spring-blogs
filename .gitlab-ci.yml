@@ -55,6 +55,7 @@ deploy_production:
   stage: deploy
   image: lwolf/kubectl_deployer:latest
   script:
+  - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/blogs spring-blogs=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   environment:
     name: staging
