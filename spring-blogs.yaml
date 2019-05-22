@@ -30,7 +30,8 @@ spec:
     spec:
       containers:
       - name: spring-blogs
-        image: rishabh050189/spring-blogs:214991090
+        image: rishabh050189/spring-blogs:$CI_JOB_ID
+        imagePullPolicy: Always
         ports:
         - containerPort: 8090
         livenessProbe:
