@@ -61,6 +61,9 @@ deploy_production:
   image: lwolf/kubectl_deployer:latest
   script:
   - kubectl version
+  - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
+  - sed -i "s/__VERSION__/${CI_COMMIT_REF_NAME}/" spring-blogs.yaml
+  - kubectl apply -f spring-blogs.yaml
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
   environment:
     name: staging
