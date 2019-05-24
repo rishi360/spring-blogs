@@ -1,5 +1,7 @@
 stages:
-
+  - build
+  - test
+  - Build-Push Docker image
   - deploy
   
 build:
@@ -51,7 +53,9 @@ Docker image:
 
 deploy_production:
   stage: deploy
-  image: lwolf/kubectl_deployer:latest
+  image: 
+    name: lachlanevenson/k8s-kubectl:latest
+    entrypoint: ["/bin/sh", "-c"]
   script:
   - kubectl version
   - kubectl apply -f namespace.yaml
