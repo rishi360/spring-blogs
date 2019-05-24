@@ -2,9 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blogs
+  name: presentation-gitlab-k8s-__CI_ENVIRONMENT_SLUG__
+  namespace: presentation-gitlab-k8s
   labels:
-    app: blogs
+    app: presentation-gitlab-k8s
+    ref: __CI_ENVIRONMENT_SLUG__
 spec:
   type: LoadBalancer
   ports:
@@ -13,20 +15,31 @@ spec:
       protocol: TCP
       name: http
   selector:
-      app: blogs
+      app: presentation-gitlab-k8s
+      ref: __CI_ENVIRONMENT_SLUG__
  
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: blogs
+  name: presentation-gitlab-k8s-__CI_ENVIRONMENT_SLUG__
+  labels:
+    app: presentation-gitlab-k8s
+    ref: __CI_ENVIRONMENT_SLUG__
+    track: stable
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: presentation-gitlab-k8s
+      ref: __CI_ENVIRONMENT_SLUG__
   template:
     metadata:
       labels:
-        app: blogs
+        app: presentation-gitlab-k8s
+        ref: __CI_ENVIRONMENT_SLUG__
+        track: stable
     spec:
       containers:
       - name: spring-blogs
