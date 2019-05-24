@@ -50,6 +50,8 @@ Docker image:
   - docker build -t rishabh050189/spring-blogs:"$CI_PIPELINE_ID" .
   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_PIPELINE_ID" 
+  
+  when: manual
 
 deploy_production:
   stage: deploy
@@ -68,4 +70,4 @@ deploy_production:
 
   only:
     - development
-  when: manual
+  
