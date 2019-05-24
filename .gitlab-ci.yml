@@ -53,9 +53,7 @@ Docker image:
 
 deploy_production:
   stage: deploy
-  image: 
-    name: lachlanevenson/k8s-kubectl:latest
-    entrypoint: ["/bin/sh", "-c"]
+  image: lwolf/kubectl_deployer:latest
   script:
   - kubectl version
   - kubectl apply -f namespace.yaml
