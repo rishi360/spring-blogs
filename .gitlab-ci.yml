@@ -7,6 +7,7 @@ stages:
 build:
   image: maven:3-jdk-8
   stage: build
+  when: manual
   before_script:
   # Install JFrog CLI
   - curl -fL https://getcli.jfrog.io | sh
@@ -29,6 +30,7 @@ build:
 unitTests:
   image: maven:3-jdk-8
   stage: test
+  when: manual
   script:
     - mvn test
 
@@ -51,10 +53,10 @@ Docker image:
   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_PIPELINE_ID" 
   
-  when: manual
 
 deploy_production:
   stage: deploy
+  when: manual
   image: lwolf/kubectl_deployer:latest
   script:
   - kubectl version
