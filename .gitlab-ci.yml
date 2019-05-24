@@ -59,7 +59,6 @@ deploy_production:
   - kubectl set image deployments/blogs spring-blogs=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   environment:
     name: staging
-    name: app=$CI_ENVIRONMENT_SLUG
     url: http://stage.rishabhtest.ml/
  
 
