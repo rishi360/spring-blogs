@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "$CI_ENVIRONMENT_SLUG"
+  name: blogs
   labels:
-    app: "$CI_ENVIRONMENT_SLUG"
+    app: blogs
 spec:
   type: LoadBalancer
   ports:
@@ -13,20 +13,20 @@ spec:
       protocol: TCP
       name: http
   selector:
-      app: "$CI_ENVIRONMENT_SLUG"
+      app: blogs
  
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: "$CI_ENVIRONMENT_SLUG"
+  name: blogs
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: "$CI_ENVIRONMENT_SLUG"
+        app: blogs
     spec:
       containers:
       - name: spring-blogs
