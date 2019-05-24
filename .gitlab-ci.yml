@@ -47,6 +47,7 @@ Docker image:
   services:
   - docker:dind
   stage: Build-Push Docker image
+  when: manual
   script:
   - docker info
   - docker build -t rishabh050189/spring-blogs:"$CI_PIPELINE_ID" .
