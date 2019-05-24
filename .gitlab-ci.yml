@@ -57,7 +57,7 @@ deploy_production:
   script:
   - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/blogs spring-blogs=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
-  - kubectl get pods --all-namespaces -o wide
+  - kubectl get all
   environment:
     name: staging
     url: http://stage.rishabhtest.ml/
