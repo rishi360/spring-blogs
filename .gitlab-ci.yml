@@ -61,7 +61,7 @@ deploy_production:
   - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/presentation-gitlab-k8s-staging presentation-gitlab-k8s-staging=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
-  - kubectl get all -l ref=${CI_ENVIRONMENT_SLUG}
+  - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
   environment:
     name: staging
     url: http://stage.rishabhtest.ml/
