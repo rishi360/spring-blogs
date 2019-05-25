@@ -60,6 +60,7 @@ deploy_production:
   when: manual
   image: lwolf/kubectl_deployer:latest
   script:
+  - helm upgrade --install
   - kubectl version
   - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - sed -i "s/__VERSION__/${CI_COMMIT_REF_NAME}/" spring-blogs.yaml
