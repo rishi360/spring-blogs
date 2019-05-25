@@ -60,10 +60,15 @@ deploy_production:
   when: manual
   image: lwolf/kubectl_deployer:latest
   script:
-  - helm upgrade --install
   - kubectl version
+  - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" ServiceAccount.yaml
+  - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" Role.yaml
+  - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" RoleBinding.yaml
   - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - sed -i "s/__VERSION__/${CI_COMMIT_REF_NAME}/" spring-blogs.yaml
+  - kubectl apply -f ServiceAccount.yaml
+  - kubectl apply -f Role.yaml
+  - kubectl apply -f RoleBinding.yaml
   - kubectl apply -f spring-blogs.yaml
   - kubectl get all -l ref=${CI_ENVIRONMENT_SLUG}
   environment:
