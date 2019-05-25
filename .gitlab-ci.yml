@@ -61,6 +61,7 @@ deploy_production:
   image: lwolf/kubectl_deployer:latest
   script:
   - kubectl version
+  - kubectl apply -f namespace.yaml
   - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" ServiceAccount.yaml
   - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" Role.yaml
   - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" RoleBinding.yaml
