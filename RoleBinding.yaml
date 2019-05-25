@@ -9,5 +9,5 @@ subjects:
     namespace: presentation-gitlab-k8s
 roleRef:
   kind: Role
-  name: some-name
+  name: presentation-gitlab-k8s-__CI_ENVIRONMENT_SLUG_
   apiGroup: rbac.authorization.k8s.io
