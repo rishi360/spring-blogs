@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: presentation-gitlab-k8s-__CI_ENVIRONMENT_SLUG__
+  namespace: presentation-gitlab-k8s
+subjects:
+  - kind: ServiceAccount
+    name: presentation-gitlab-k8s-__CI_ENVIRONMENT_SLUG_
+    namespace: presentation-gitlab-k8s
+roleRef:
+  kind: Role
+  name: some-name
+  apiGroup: rbac.authorization.k8s.io
