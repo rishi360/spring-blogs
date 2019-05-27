@@ -61,6 +61,7 @@ deploy_production:
   script:
   - export
   - kubectl version
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/presentation-gitlab-k8s-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
