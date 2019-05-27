@@ -3,9 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: app-CI_ENVIRONMENT_SLUG
-  namespace: citest-12348860
+  namespace: KUBE_NAMESPACE
   labels:
-    app: $CI_ENVIRONMENT_SLUG
+    app: CI_ENVIRONMENT_SLUG
    
 spec:
   type: LoadBalancer
@@ -23,10 +23,10 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: app-CI_ENVIRONMENT_SLUG
-  namespace: citest-12348860
+  namespace: KUBE_NAMESPACE
   labels:
-    app: $CI_ENVIRONMENT_SLUG
-    space: citest-12348860
+    app: CI_ENVIRONMENT_SLUG
+    space: KUBE_NAMESPACE
     track: stable
 spec:
   replicas: 1
@@ -40,7 +40,7 @@ spec:
         name: app-CI_ENVIRONMENT_SLUG
         app: CI_ENVIRONMENT_SLUG
         track: stable
-        space: citest-12348860
+        space: KUBE_NAMESPACE
       annotations:
         build_id: "$CI_JOB_ID"
     spec:
