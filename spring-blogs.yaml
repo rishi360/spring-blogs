@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-$CI_ENVIRONMENT_SLUG
-  namespace: $KUBE_NAMESPACE
+  name: app-"$CI_ENVIRONMENT_SLUG"
+  namespace: "$KUBE_NAMESPACE"
   labels:
-    app: $CI_ENVIRONMENT_SLUG
+    app: "$CI_ENVIRONMENT_SLUG"
    
 spec:
   type: LoadBalancer
@@ -15,37 +15,37 @@ spec:
       protocol: TCP
       name: http
   selector:
-      app: $CI_ENVIRONMENT_SLUG
+      app: "$CI_ENVIRONMENT_SLUG"
  
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: app-$CI_ENVIRONMENT_SLUG
-  namespace: $KUBE_NAMESPACE
+  name: app-"$CI_ENVIRONMENT_SLUG"
+  namespace: "$KUBE_NAMESPACE"
   labels:
-    app: $CI_ENVIRONMENT_SLUG
-    space: $KUBE_NAMESPACE
+    app: "$CI_ENVIRONMENT_SLUG"
+    space: "$KUBE_NAMESPACE"
     track: stable
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: $CI_ENVIRONMENT_SLUG
-      name: app-$CI_ENVIRONMENT_SLUG
+      app: "$CI_ENVIRONMENT_SLUG"
+      name: app-"$CI_ENVIRONMENT_SLUG"
   template:
     metadata:
       labels:
-        name: app-$CI_ENVIRONMENT_SLUG
-        app: $CI_ENVIRONMENT_SLUG
+        name: app-"$CI_ENVIRONMENT_SLUG"
+        app: "$CI_ENVIRONMENT_SLUG"
         track: stable
-        space: $KUBE_NAMESPACE
+        space: "$KUBE_NAMESPACE"
       annotations:
         build_id: "$CI_JOB_ID"
     spec:
       containers:
-      - name: app-$CI_ENVIRONMENT_SLUG
+      - name: app-"$CI_ENVIRONMENT_SLUG"
         image: rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
         imagePullPolicy: Always
         ports:
