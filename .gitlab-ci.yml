@@ -56,9 +56,8 @@ deploy_production:
   stage: deploy
   image: lwolf/kubectl_deployer:latest
   script:
-  - export
   - kubectl version
-  - sed -i "s/KUBE_NAMESPACE/$KUBE_NAMESPACE/" spring-blogs.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" spring-blogs.yaml
   - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/presentation-gitlab-k8s-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
