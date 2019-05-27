@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-"$CI_ENVIRONMENT_SLUG"
+  name: app-$CI_ENVIRONMENT_SLUG
   namespace: citest-12348860
   labels:
-    app: "$CI_ENVIRONMENT_SLUG"
+    app: $CI_ENVIRONMENT_SLUG
    
 spec:
   type: LoadBalancer
@@ -15,37 +15,37 @@ spec:
       protocol: TCP
       name: http
   selector:
-      app: "$CI_ENVIRONMENT_SLUG"
+      app: $CI_ENVIRONMENT_SLUG
  
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: app-"$CI_ENVIRONMENT_SLUG"
+  name: app-$CI_ENVIRONMENT_SLUG
   namespace: citest-12348860
   labels:
-    app: "$CI_ENVIRONMENT_SLUG"
+    app: $CI_ENVIRONMENT_SLUG
     space: citest-12348860
     track: stable
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "$CI_ENVIRONMENT_SLUG"
-      name: app-"$CI_ENVIRONMENT_SLUG"
+      app: $CI_ENVIRONMENT_SLUG
+      name: app-$CI_ENVIRONMENT_SLUG
   template:
     metadata:
       labels:
-        name: app-"$CI_ENVIRONMENT_SLUG"
-        app: "$CI_ENVIRONMENT_SLUG"
+        name: app-$CI_ENVIRONMENT_SLUG
+        app: $CI_ENVIRONMENT_SLUG
         track: stable
         space: citest-12348860
       annotations:
         build_id: "$CI_JOB_ID"
     spec:
       containers:
-      - name: app-"$CI_ENVIRONMENT_SLUG"
+      - name: app-$CI_ENVIRONMENT_SLUG
         image: rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
         imagePullPolicy: Always
         ports:
