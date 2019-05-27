@@ -54,7 +54,7 @@ Docker image:
 
 deploy_production:
   stage: deploy
-  image: lwolf/kubectl_deployer:latest
+  image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
   script:
   - export
   - kubectl version
