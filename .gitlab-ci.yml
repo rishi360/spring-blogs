@@ -59,6 +59,7 @@ deploy_production:
   stage: deploy
   image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
   script:
+  - export
   - kubectl version
   - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/presentation-gitlab-k8s-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
