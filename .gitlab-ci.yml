@@ -56,6 +56,8 @@ deploy_production:
   stage: deploy
   image: lwolf/kubectl_deployer:latest
   script:
+  - export
+  - echo KUBE_NAMESPACE=$KUBE_NAMESPACE
   - kubectl version
   - kubectl apply -f spring-blogs.yaml
   - kubectl set image deployments/presentation-gitlab-k8s-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
