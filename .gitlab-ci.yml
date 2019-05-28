@@ -77,7 +77,7 @@ unitTests:
     image: maven:3-jdk-8
     stage: test
     script:
-  - mvn test
+      - mvn test
 include:
   - template: Jobs/Build.gitlab-ci.yml
   - template: Jobs/Code-Quality.gitlab-ci.yml
