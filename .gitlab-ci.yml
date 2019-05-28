@@ -3,6 +3,7 @@ stages:
   - test
   - Build-Push Docker image
   - deploy
+  - review
   
 build:
   image: maven:3-jdk-8
@@ -67,6 +68,24 @@ deploy_production:
   environment:
     name: staging
     url: http://stage.rishabhtest.ml/
+    
+app_monitor:
+  stage: review
+  image: alpine:latest
+  variables:
+  # KUBE_INGRESS_BASE_DOMAIN is the application deployment domain and should be set as a variable at the group or project level.
+  # KUBE_INGRESS_BASE_DOMAIN: domain.example.com
+
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: testing-password
+  POSTGRES_ENABLED: "true"
+  POSTGRES_DB: $CI_ENVIRONMENT_SLUG
+  POSTGRES_VERSION: 9.6.2
+
+  KUBERNETES_VERSION: 1.11.9
+  HELM_VERSION: 2.13.1
+
+  DOCKER_DRIVER: overlay2
       
   only:
     - metrix
