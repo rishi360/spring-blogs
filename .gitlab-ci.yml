@@ -69,7 +69,7 @@ deploy_production:
     name: staging
     url: http://stage.rishabhtest.ml/
     
-app_monitor:
+monitor:
   image: alpine:latest
   variables:
   # KUBE_INGRESS_BASE_DOMAIN is the application deployment domain and should be set as a variable at the group or project level.
