@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: app-CI_ENVIRONMENT_SLUG
+  # Change this to the namespace the Prometheus instance is running in
+  namespace: KUBE_NAMESPACE
+  labels:
+    app: CI_ENVIRONMENT_SLUG
+    prometheus: staging
+spec:
+  selector:
+    matchLabels:
+      app: CI_ENVIRONMENT_SLUG
+  namespaceSelector:
+    matchNames:
+    - KUBE_NAMESPACE
+  endpoints:
+  - port: http-metrics
+    interval: 15s
