@@ -69,5 +69,5 @@ deploy_production:
     url: http://stage.rishabhtest.ml/
       
   only:
-    - development
+    - metrix
   
