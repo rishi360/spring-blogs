@@ -6,6 +6,11 @@ metadata:
   namespace: KUBE_NAMESPACE
   labels:
     app: CI_ENVIRONMENT_SLUG
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+    prometheus.io/scheme: "http"
+    prometheus.io/path: "/metrics"
    
 spec:
   type: LoadBalancer
