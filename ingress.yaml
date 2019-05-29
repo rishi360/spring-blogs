@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: app-CI_ENVIRONMENT_SLUG
-  namespace: presentation-gitlab-k8s
+  namespace: KUBE_NAMESPACE
   labels:
     app: app-CI_ENVIRONMENT_SLUG
   annotations:
