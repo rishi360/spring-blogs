@@ -57,7 +57,6 @@ deploy_review:
   environment:
     name: review
     url: https://$CI_ENVIRONMENT_SLUG.rishabhtest.ml
-    on_stop: stop_review
   script:
   - kubectl version
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" ingress.yaml
