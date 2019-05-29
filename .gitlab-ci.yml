@@ -52,12 +52,12 @@ Docker image:
   - docker push rishabh050189/spring-blogs:"$CI_PIPELINE_ID" 
 deploy_review:
   image:
-    name: lachlanevenson/k8s-kubectl:latest
+    name: quay.io/lifechurch/k8s-deploy-helper:3.0.0
     entrypoint: ["/bin/sh", "-c"]
   stage: review
   environment:
     name: review
-    url: https://$CI_ENVIRONMENT_SLUG.rishabhtest.ml
+    url: http://$CI_ENVIRONMENT_SLUG.rishabhtest.ml
   script:
   - kubectl version
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" ingress.yaml
