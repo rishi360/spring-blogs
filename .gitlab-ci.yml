@@ -60,14 +60,12 @@ deploy_review:
     url: https://$CI_ENVIRONMENT_SLUG.rishabhtest.ml
   script:
   - kubectl version
-  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" service-monitor.yaml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" ingress.yaml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" ingress.yaml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" spring-blogs.yaml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - kubectl apply -f spring-blogs.yaml
   - kubectl apply -f ingress.yaml
-  - kubectl apply -f service-monitor.yaml
   - kubectl set image deployments/app-review app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
 
 deploy_production:
