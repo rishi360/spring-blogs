@@ -2,7 +2,7 @@ stages:
   - build
   - test
   - Build-Push Docker image
-  - reviewall
+  - review
   - deploy
   
   
@@ -54,9 +54,9 @@ deploy_review:
   image:
     name: lachlanevenson/k8s-kubectl:latest
     entrypoint: ["/bin/sh", "-c"]
-  stage: reviewall
+  stage: review
   environment:
-    name: review
+    name: reviewall
     url: http://$CI_ENVIRONMENT_SLUG.rishabhtest.ml
   script:
   - kubectl version
