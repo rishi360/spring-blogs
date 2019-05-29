@@ -9,15 +9,15 @@ metadata:
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8090"
-    prometheus.io/path: "metrics"
+    prometheus.io/path: "/metrics"
    
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-    - port: 80
-      targetPort: 8090
+    - name: http-metrics
+      port: 80
       protocol: TCP
-      name: http
+      
   selector:
       app: CI_ENVIRONMENT_SLUG
  
