@@ -2,7 +2,7 @@ stages:
   - build
   - test
   - Build-Push Docker image
-  - review
+  - reviewall
   - deploy
   
   
