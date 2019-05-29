@@ -67,6 +67,7 @@ deploy_review:
   - kubectl apply -f spring-blogs.yaml
   - kubectl apply -f ingress.yaml --force
   - kubectl set image deployments/app-review app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
+  - kubectl get all,ing -l app=${CI_ENVIRONMENT_SLUG}
 
 deploy_production:
   stage: deploy
@@ -74,14 +75,12 @@ deploy_production:
   script:
   - echo $CI_ENVIRONMENT_NAME
   - kubectl version
-  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" service-monitor.yaml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" ingress.yaml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" ingress.yaml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" spring-blogs.yaml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - kubectl apply -f spring-blogs.yaml
-  - kubectl apply -f ingress.yaml --force
-  - kubectl apply -f service-monitor.yaml
+  - kubectl apply -f ingress.yaml
   - kubectl set image deployments/app-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
   environment:
