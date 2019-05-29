@@ -20,7 +20,7 @@ spec:
   - host: app-CI_ENVIRONMENT_SLUG.rishabhtest.ml
     http:
       paths:
-      - path: /
+      - path: /login
         backend:
           serviceName: app-CI_ENVIRONMENT_SLUG
           servicePort: 8090
