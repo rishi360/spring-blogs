@@ -12,14 +12,15 @@ metadata:
     prometheus.io/path: "/metrics"
    
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-    - name: http-metrics
-      port: 80
+    - port: 80
+      targetPort: 8090
       protocol: TCP
-      
+      name: http
   selector:
       app: CI_ENVIRONMENT_SLUG
+
  
 
 ---
