@@ -80,7 +80,7 @@ deploy_production:
   - kubectl apply -f prometheus-deployment.yml
   - kubectl apply -f metrics.yml
   - kubectl apply -f redis.yml
-  - kubectl apply -f prometheus-rules-config-map.yml
+  - kubectl delete -f prometheus-rules-config-map.yml
   - kubectl set image deployments/app-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
   environment:
