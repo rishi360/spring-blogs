@@ -15,27 +15,27 @@ spec:
         app: CI_ENVIRONMENT_SLUG
     spec:
       containers:
-      - name: CI_ENVIRONMENT_SLUG
+      - name: alertmanager
         image: prom/alertmanager:latest
         args:
-          - "--config.file=/etc/CI_ENVIRONMENT_SLUG/config.yml"
-          - "--storage.path=/CI_ENVIRONMENT_SLUG"
+          - "--config.file=/etc/alertmanager/config.yml"
+          - "--storage.path=/alertmanager"
         ports:
-        - name: CI_ENVIRONMENT_SLUG
+        - name: alertmanager
           containerPort: 9093
         volumeMounts:
         - name: config-volume
-          mountPath: /etc/CI_ENVIRONMENT_SLU
+          mountPath: /etc/alertmanager
         - name: templates-volume
-          mountPath: /etc/CI_ENVIRONMENT_SLU_templates
-        - name: CI_ENVIRONMENT_SLU
-          mountPath: /CI_ENVIRONMENT_SLU
+          mountPath: /etc/alertmanager-templates
+        - name: alertmanager
+          mountPath: /alertmanager
       volumes:
       - name: config-volume
         configMap:
-          name: CI_ENVIRONMENT_SLU_config
+          name: alertmanager-config
       - name: templates-volume
         configMap:
-          name: CI_ENVIRONMENT_SLU_templates
-      - name: CI_ENVIRONMENT_SLU
+          name: alertmanager-templates
+      - name: alertmanager
         emptyDir: {}
