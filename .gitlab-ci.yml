@@ -64,17 +64,26 @@ deploy_production:
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" prometheus-config-map.yml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" prometheus-deployment.yml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" prometheus-service.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" AlertManagerConfigmap.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" Deployment.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" AlterService.yaml
   - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" spring-blogs.yaml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" clusterRole.yml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-config-map.yml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-deployment.yml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-service.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" Deployment.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" AlterService.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" AlertManagerConfigmap.yaml
   - kubectl apply -f spring-blogs.yaml
   - kubectl apply -f clusterRole.yml
   - kubectl apply -f prometheus-config-map.yml
   - kubectl apply -f prometheus-deployment.yml
   - kubectl apply -f prometheus-service.yaml
+  - kubectl apply -f AlertManagerConfigmap.yaml
+  - kubectl apply -f Deployment.yaml
+  - kubectl apply -f AlertManagerConfigmap.yaml
   - kubectl set image deployments/app-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
   environment:
