@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: CI_ENVIRONMENT_SLUG-CONF
+  name: CI_ENVIRONMENT_SLUGconf
   labels:
-    name: CI_ENVIRONMENT_SLUG-CONF
+    name: CI_ENVIRONMENT_SLUGconf
   namespace: KUBE_NAMESPACE
 data:
   prometheus.yml: |-
