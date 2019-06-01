@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-service
+  name: CI_ENVIRONMENT_SLUG
   namespace: KUBE_NAMESPACE
   annotations:
       prometheus.io/scrape: 'true'
@@ -10,7 +10,7 @@ metadata:
   
 spec:
   selector: 
-    app: prometheus-server
+    app: CI_ENVIRONMENT_SLUG
   type: NodePort  
   ports:
     - port: 8080
