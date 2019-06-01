@@ -25,17 +25,17 @@ spec:
           containerPort: 9093
         volumeMounts:
         - name: config-volume
-          mountPath: /etc/alertmanager
+          mountPath: /etc/CI_ENVIRONMENT_SLU
         - name: templates-volume
-          mountPath: /etc/alertmanager-templates
-        - name: alertmanager
-          mountPath: /alertmanager
+          mountPath: /etc/CI_ENVIRONMENT_SLU-templates
+        - name: CI_ENVIRONMENT_SLU
+          mountPath: /CI_ENVIRONMENT_SLU
       volumes:
       - name: config-volume
         configMap:
-          name: alertmanager-config
+          name: CI_ENVIRONMENT_SLU-config
       - name: templates-volume
         configMap:
-          name: alertmanager-templates
-      - name: alertmanager
+          name: CI_ENVIRONMENT_SLU-templates
+      - name: CI_ENVIRONMENT_SLU
         emptyDir: {}
