@@ -26,7 +26,7 @@ build:
     - ./jfrog rt bce gitlabci-maven-artifactory $CI_PIPELINE_ID
     # Pass the build information to Artifactory
     - ./jfrog rt bp gitlabci-maven-artifactory $CI_PIPELINE_ID
- when: manual
+  when: manual
   
     
 unitTests:
@@ -34,7 +34,7 @@ unitTests:
   stage: test
   script:
     - mvn test
- when: manual
+  when: manual
   
 
 Docker image: 
