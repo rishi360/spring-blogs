@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: prometheus
+  name: CI_ENVIRONMENT_SLUG
 rules:
 - apiGroups: [""]
   resources:
@@ -22,11 +22,11 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
-  name: prometheus
+  name: CI_ENVIRONMENT_SLUG
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: prometheus
+  name: CI_ENVIRONMENT_SLUG
 subjects:
 - kind: ServiceAccount
   name: default
