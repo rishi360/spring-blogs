@@ -74,12 +74,12 @@ deploy_production:
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" redis.yml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-rules-config-map.yml
   - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
-  - kubectl apply -f spring-blogs.yaml
-  - kubectl apply -f clusterRole.yml
-  - kubectl apply -f prometheus-config-map.yml
-  - kubectl apply -f prometheus-deployment.yml
-  - kubectl apply -f metrics.yml
-  - kubectl apply -f redis.yml
+  - kubectl delete -f spring-blogs.yaml
+  - kubectl delete -f clusterRole.yml
+  - kubectl delete -f prometheus-config-map.yml
+  - kubectl delete -f prometheus-deployment.yml
+  - kubectl delete -f metrics.yml
+  - kubectl delete -f redis.yml
   - kubectl delete -f prometheus-rules-config-map.yml
   - kubectl set image deployments/app-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
