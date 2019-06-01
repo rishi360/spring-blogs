@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: prometheus-deployment
+  name: CI_ENVIRONMENT_SLUG
   namespace: KUBE_NAMESPACE
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: prometheus-server
+        app: CI_ENVIRONMENT_SLUG
     spec:
       containers:
-        - name: prometheus
+        - name: CI_ENVIRONMENT_SLUG
           image: prom/prometheus:v2.2.1
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
@@ -19,15 +19,15 @@ spec:
           ports:
             - containerPort: 9090
           volumeMounts:
-            - name: prometheus-config-volume
+            - name: CI_ENVIRONMENT_SLUG
               mountPath: /etc/prometheus/
-            - name: prometheus-storage-volume
+            - name: CI_ENVIRONMENT_SLUG
               mountPath: /prometheus/
       volumes:
-        - name: prometheus-config-volume
+        - name: CI_ENVIRONMENT_SLUG
           configMap:
             defaultMode: 420
-            name: prometheus-server-conf
+            name: CI_ENVIRONMENT_SLUG
   
-        - name: prometheus-storage-volume
+        - name: CI_ENVIRONMENT_SLUG
           emptyDir: {}
