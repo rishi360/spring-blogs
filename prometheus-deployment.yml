@@ -19,15 +19,15 @@ spec:
           ports:
             - containerPort: 9090
           volumeMounts:
-            - name: CI_ENVIRONMENT_SLUG
+            - name: prometheus-config-volume
               mountPath: /etc/prometheus/
-            - name: CI_ENVIRONMENT_SLUG
+            - name: prometheus-storage-volume
               mountPath: /prometheus/
       volumes:
-        - name: CI_ENVIRONMENT_SLUG
+        - name: prometheus-config-volume
           configMap:
             defaultMode: 420
-            name: CI_ENVIRONMENT_SLUG
+            name: prometheus-server-conf
   
-        - name: CI_ENVIRONMENT_SLUG
+        - name: prometheus-storage-volume
           emptyDir: {}
