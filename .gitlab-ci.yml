@@ -26,6 +26,7 @@ build:
     - ./jfrog rt bce gitlabci-maven-artifactory $CI_PIPELINE_ID
     # Pass the build information to Artifactory
     - ./jfrog rt bp gitlabci-maven-artifactory $CI_PIPELINE_ID
+  when: manual
   
     
 unitTests:
@@ -33,6 +34,7 @@ unitTests:
   stage: test
   script:
     - mvn test
+ when: manual
   
 
 Docker image: 
@@ -49,6 +51,7 @@ Docker image:
   - docker build -t rishabh050189/spring-blogs:"$CI_PIPELINE_ID" .
   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
   - docker push rishabh050189/spring-blogs:"$CI_PIPELINE_ID" 
+  when: manual
 
 deploy_production:
   stage: deploy
