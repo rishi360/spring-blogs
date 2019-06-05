@@ -11,7 +11,7 @@ spec:
         app: CI_ENVIRONMENT_SLUG
     spec:
       containers:
-        - name: CI_ENVIRONMENT_SLUG
+        - name: prometheus
           image: prom/prometheus:v2.2.1
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
