@@ -81,9 +81,6 @@ deploy_production:
   - kubectl apply -f prometheus-config-map.yml
   - kubectl apply -f prometheus-deployment.yml
   - kubectl apply -f prometheus-service.yaml
-  - kubectl delete -f AlertManagerConfigmap.yaml
-  - kubectl delete -f Deployment.yaml
-  - kubectl delete -f AlertManagerConfigmap.yaml
   - kubectl set image deployments/app-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
   - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
   environment:
