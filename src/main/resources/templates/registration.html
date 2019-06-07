@@ -48,12 +48,7 @@
                            class="form-control input-lg"/>
                 </div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                           class="alert alert-danger"></label>
-                    <input type="password" th:field="*{password}" placeholder="Confirm Password"
-                           class="form-control input-lg"/>
-                </div>
+                
                 <div class="form-group">
                     <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                            class="alert alert-danger"></label>
