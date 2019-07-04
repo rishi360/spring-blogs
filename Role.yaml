@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: presentation-gitlab-k8s-__CI_ENVIRONMENT_SLUG__
+  namespace: presentation-gitlab-k8s
+rules:
+  - apiGroups: ["extensions"]
+    resources: ["deployments"]
+    verbs: ["get","list","patch","update"]

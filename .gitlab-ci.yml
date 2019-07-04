@@ -1,23 +1,92 @@
-image: maven:3.3.9
-
-before_script:
-
-  - curl -fL https://getcli.jfrog.io | sh
-
-  - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password=$ARTIFACTORY_PASS --interactive=false
 stages:
   - build
   - test
-build:
-    stage: build
-    script: 
-    
-    -   mvn clean package
+  - Build-Push Docker image
+  - deploy
   
-    - ./jfrog rt u "target/*.jar" testrepo 
+  
+build:
+  image: maven:3-jdk-8
+  stage: build
+  before_script:
+  # Install JFrog CLI
+  - curl -fL https://getcli.jfrog.io | sh
+  # Configure Artifactory instance with JFrog CLI
+  - ./jfrog rt config --url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_PASS
+  - ./jfrog rt c show
+  # Set the M2_HOME environment variable
+  - export M2_HOME=/usr/share/maven
+  # Replace the repository name in the configuration.yml to the correct one.
+  - sed -i 's,MAVEN_REPO_KEY,'"$MAVEN_REPO_KEY"',g' configuration.yml
+  
+  script:
+    # Run the MVN command
+    - ./jfrog rt mvn "clean install -DskipTests" configuration.yml --build-name=gitlabci-maven-artifactory --build-number=$CI_PIPELINE_ID
+    # Collect the environment variables
+    - ./jfrog rt bce gitlabci-maven-artifactory $CI_PIPELINE_ID
+    # Pass the build information to Artifactory
+    - ./jfrog rt bp gitlabci-maven-artifactory $CI_PIPELINE_ID
+  
+  
+    
 unitTests:
+  image: maven:3-jdk-8
   stage: test
   script:
     - mvn test
+  
+  
 
-   
+Docker image: 
+  image: docker:latest
+  
+  variables:
+    DOCKER_DRIVER: overlay2
+    
+  services:
+  - docker:dind
+  stage: Build-Push Docker image
+  script:
+  - docker info
+  - docker build -t rishabh050189/spring-blogs:"$CI_PIPELINE_ID" .
+  - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+  - docker push rishabh050189/spring-blogs:"$CI_PIPELINE_ID" 
+  
+
+deploy_production:
+  stage: deploy
+  image: quay.io/lifechurch/k8s-deploy-helper:3.0.0
+  script:
+  - echo $CI_ENVIRONMENT_NAME
+  - kubectl version
+  - kubectl version
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" clusterRole.yml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" prometheus-config-map.yml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" prometheus-deployment.yml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" prometheus-service.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" AlertManagerConfigmap.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" Deployment.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" AlterService.yaml
+  - sed -i "s/KUBE_NAMESPACE/${KUBE_NAMESPACE}/" spring-blogs.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" spring-blogs.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" clusterRole.yml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-config-map.yml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-deployment.yml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" prometheus-service.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" Deployment.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" AlterService.yaml
+  - sed -i "s/CI_ENVIRONMENT_SLUG/${CI_ENVIRONMENT_SLUG}/" AlertManagerConfigmap.yaml
+  - kubectl apply -f spring-blogs.yaml
+  - kubectl apply -f clusterRole.yml
+  - kubectl apply -f prometheus-config-map.yml
+  - kubectl apply -f prometheus-deployment.yml
+  - kubectl apply -f prometheus-service.yaml
+  - kubectl set image deployments/app-staging app-$CI_ENVIRONMENT_SLUG=rishabh050189/spring-blogs:"$CI_PIPELINE_ID"
+  - kubectl get all -l app=${CI_ENVIRONMENT_SLUG}
+  environment:
+    name: staging
+    url: http://stage.rishabhtest.ml/
+      
+  only:
+    - metrix
+  
