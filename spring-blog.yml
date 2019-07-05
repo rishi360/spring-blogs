@@ -1,0 +1,22 @@
+version:'3'
+services:
+  app:
+    image:
+    depends_on:
+      - db
+    ports:
+      - 8081:8090
+    environment: 
+      - DATABASE_HOST=db
+      - DATABASE_USER=admin
+      - DATABASE_PASSWORD=admin
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=blog_simple_db
+  db:
+    image: mysql:latest
+    volumes:
+      - ./mounts/db_data:/var/lib/mysql/data
+    environment:
+      - DATABASE_USER=admin
+      - DATABASE_PASSWORD=admin
+      - DATABASE_NAME=blog_simple_db
