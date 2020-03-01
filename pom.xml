@@ -115,16 +115,7 @@
     </repository>
 </distributionManagement>
 
-    <build>
-        <plugins>
-            <!-- Package as an executable jar/war -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-           <build>
+      <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -136,4 +127,5 @@
       </plugin>
     </plugins>
   </build>
+         
 </project>
